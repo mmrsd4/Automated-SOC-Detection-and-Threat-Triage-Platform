@@ -1,0 +1,18 @@
+{
+    "incident_id": "INC-001",
+    "incident_type": "Brute Force",
+    "severity": "Low",
+    "timestamp": "2026-05-20 02:22:26.146747",
+    "affected_host": "WIN10",
+    "source_of_alert": "Splunk",
+    "analyst": "Rashad",
+    "ioc": "8.8.8.8",
+    "mitre_attack": {
+        "technique_id": "T1110",
+        "technique_name": "Brute Force"
+    },
+    "abuseipdb": {},
+    "virustotal": {},
+    "analyst_notes": "IOC currently appears non-malicious.",
+    "recommendation": "No immediate malicious activity detected."
+}
