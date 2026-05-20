@@ -1,468 +1,252 @@
-\# Automated SOC Detection \& Alert Triage Platform
+# Automated SOC Detection & Threat Triage Platform
 
+## Overview
 
+This project simulates an enterprise-style Security Operations Center (SOC) environment focused on centralized log collection, attack detection, automated threat triage, and incident response workflows.
 
-\## Project Overview
+The lab integrates:
+- Splunk Enterprise
+- Wazuh
+- Sysmon
+- Python automation
+- VirusTotal API
+- AbuseIPDB API
 
+The environment was designed to simulate real-world SOC operations including:
+- Endpoint telemetry monitoring
+- Detection engineering
+- Attack simulation
+- IOC enrichment
+- Alert triage
+- Incident reporting
+- Threat intelligence integration
 
+---
 
-This project simulates a real-world SOC (Security Operations Center) environment for detecting, monitoring, investigating, and triaging security incidents using Splunk, Wazuh, Sysmon, Python automation, and Windows/Linux systems.
+# Lab Environment
 
+| System | Role |
+| Ubuntu Server | Central SOC Server |
+| Windows 10 | Monitored Endpoint |
+| Kali Linux | Attack Simulation System |
 
+---
 
-The platform was built using multiple virtual machines to simulate enterprise attack and defense workflows.
+# Technology Stack
 
+| Category | Tools |
+| SIEM | Splunk Enterprise |
+| Endpoint Monitoring | Sysmon |
+| Security Monitoring | Wazuh |
+| Log Forwarding | Splunk Universal Forwarder |
+| Automation | Python |
+| Threat Intelligence | VirusTotal API, AbuseIPDB API |
+| Operating Systems | Ubuntu Server, Windows 10, Kali Linux |
 
+---
 
-\---
+# SOC Workflow
 
+## 1. Build Lab Environment
 
+### Ubuntu Server
+![Ubuntu](screenshots/ubuntu/1-ubuntu-ip.png)
 
-\# Lab Environment
+### Windows Endpoint
+![Windows](screenshots/windows/3-windows-ip.png)
 
+### Kali Linux
+![Kali](screenshots/kali/6-kali-ip.png)
 
+---
 
-| Machine | Role |
+# 2. Central SOC Server Configuration
 
-| Ubuntu Server | SOC Server |
+## Splunk Enterprise Operational
+![Splunk](screenshots/splunk/2-splunkenterprice-working.png)
 
-| Windows 10 | Victim Endpoint |
+---
 
-| Kali Linux | Attacker Machine |
+# 3. Windows Endpoint Telemetry Collection
 
+## Sysmon Logs Generated
+![Sysmon](screenshots/windows/4-sysmonlogs.png)
 
+## Windows Logs Forwarded to Splunk
+![Windows Logs](screenshots/splunk/5-Windowslogs-generated-in-splunk.png)
 
-\---
+---
 
+# 4. Attack Simulation
 
+## Nmap Reconnaissance Scan
+![Nmap](screenshots/kali/7-Nmap-results.png)
 
-\# Tools Used
+## Splunk Detection for Nmap Activity
+![Nmap Detection](screenshots/splunk/8-Splunk-nmap-detection.png)
 
+---
 
+## Hydra SMB Brute Force Attack
+![Hydra](screenshots/kali/9-Hydra-attack.png)
 
-| Tool | Purpose |
+## Failed Login Events Detected
+![Failed Logins](screenshots/splunk/10-failed-login-events-of-hydra.png)
 
-| Splunk Enterprise | SIEM monitoring |
+## Failed Login SPL Query Results
+![SPL Query](screenshots/splunk/13-failed-login-SPL-query-results.png)
 
-| Wazuh | Endpoint monitoring |
+## Failed Login Alert Creation
+![Alert](screenshots/splunk/14-failed-login-Alert-creation-page.png)
 
-| Sysmon | Windows telemetry |
+---
 
-| Splunk Universal Forwarder | Log forwarding |
+## Suspicious PowerShell Execution
+![PowerShell](screenshots/windows/11-PowerShell-execution.png)
 
-| Python | Alert automation |
+## Splunk PowerShell Detection
+![PowerShell Detection](screenshots/splunk/12-PowerShell-execution-Splunk-detection.png)
 
-| Nmap | Reconnaissance |
+## Encoded Command Alert Detection
+![Encoded Alert](screenshots/splunk/15-encoded-command-alert.png)
 
-| Hydra | Brute-force simulation |
+---
 
-| VirusTotal API | IOC enrichment |
+# 5. SOC Dashboard & Alerting
 
-| AbuseIPDB | Threat intelligence |
+## Full SOC Dashboard
+![SOC Dashboard](screenshots/splunk/17-full-SOC-dashboard.png)
 
+## Splunk Alert Configuration
+![Splunk Alerts](screenshots/splunk/18-Configure-Splunk-Alerts.png)
 
+---
 
-\---
+# 6. Wazuh Security Monitoring
 
+## Active Wazuh Agent
+![Wazuh Agent](screenshots/wazuh/19-active-Wazuh-agent.png)
 
+## Wazuh Dashboard
+![Wazuh Dashboard](screenshots/wazuh/20-Wazuh-dashboard.png)
 
-\# Architecture
+## Wazuh Security Event
+![Wazuh Event](screenshots/wazuh/21-Wazuh-event.png)
 
+---
 
+# 7. Automated IOC Enrichment & Threat Triage
 
-\- Kali Linux attacks Windows 10 endpoint
+## Python IOC Enrichment Automation
+![IOC Automation](screenshots/automation/16-Python-IOC-Enrichment-Automation.png)
 
-\- Windows generates logs
+## IOC Enrichment Results
+![IOC Results](screenshots/automation/22-Python%20IOC-Enrichment-Script-terminal-output-and%20IOC-Enrichment-Result.png)
 
-\- Logs are forwarded to Ubuntu SOC Server
+## JSON Incident Report Generation
+![JSON Report](screenshots/automation/23-Python-IOC-Enrichment-Script-JSON-Incident-Report.png)
 
-\- Splunk detects suspicious activity
+## Automated Incident Reports
+![Incident Report](screenshots/automation/24-Generate-Automated-Incident-Reports.png)
 
-\- Python automation enriches alerts
+## Discord Alert Notifications
+![Discord Alerts](screenshots/automation/25-Discord-Alert-Notifications-.png)
 
-\- Incident reports are generated
+## Incident Report with MITRE ATT&CK IDs
+![ATTACK Mapping](screenshots/automation/26-Incident-Report-with-ATT&CK-IDs.png)
 
-\- Discord notifications are sent
+---
 
+# Detection Engineering
 
+## Key Detection Use Cases
 
-\---
+### Brute Force Detection
+- Windows Event ID 4625
+- Authentication anomaly monitoring
+- Failed login threshold alerts
 
+### PowerShell Abuse Detection
+- Encoded PowerShell commands
+- Suspicious process execution
+- Process creation monitoring
 
+### Reconnaissance Detection
+- Nmap scan activity
+- Port scan behavior analysis
+- Network telemetry investigation
 
-\# Network Configuration
+---
 
+# Automation Features
 
+## IOC Enrichment Pipeline
 
-All virtual machines use NAT networking inside VMware Workstation.
+Integrated APIs:
+- VirusTotal
+- AbuseIPDB
 
+Automation capabilities:
+- IOC reputation analysis
+- Threat severity classification
+- Automated JSON reporting
+- Discord notifications
+- Incident enrichment workflows
 
+---
 
-| Machine | Example IP |
+# MITRE ATT&CK Mapping
 
-| Ubuntu Server | 192.168.x.x |
+| Technique | ATT&CK ID |
+| PowerShell | T1059.001 |
+| Brute Force | T1110 |
+| Network Service Scanning | T1046 |
+| Command and Scripting Interpreter | T1059 |
 
-| Windows 10 | 192.168.x.x |
+---
 
-| Kali Linux | 192.168.x.x |
+# Project Structure
 
+```text
+Automated-SOC-Platform/
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+│
+├── architecture/
+├── detections/
+├── dashboards/
+├── attack_simulations/
+├── automation/
+├── playbooks/
+├── rules/
+├── scripts/
+├── reports/
+├── screenshots/
+└── mitre_mapping/
+```
 
+---
 
-\---
+# Detection Query Example
 
+```spl
+index=main EventCode=4625
+| stats count by Account_Name, Source_Network_Address
+| where count > 5
+```
 
 
-\# Project Workflow
+---
 
+# Disclaimer
 
+This project was built in an isolated lab environment for educational and defensive cybersecurity purposes only.
 
-\## Step 1 — VM Setup
+---
 
+# License
 
-
-\- Created Ubuntu Server VM
-
-\- Created Windows 10 VM
-
-\- Created Kali Linux VM
-
-\- Configured NAT networking
-
-
-
-\---
-
-
-
-\## Step 2 — Splunk Installation
-
-
-
-Installed Splunk Enterprise on Ubuntu Server.
-
-
-
-Configured:
-
-\- Web interface
-
-\- Receiving port 9997
-
-\- Log indexing
-
-
-
-\---
-
-
-
-\## Step 3 — Endpoint Monitoring
-
-
-
-Installed:
-
-\- Sysmon
-
-\- Splunk Universal Forwarder
-
-\- Wazuh Agent
-
-
-
-on Windows 10 endpoint.
-
-
-
-\---
-
-
-
-\## Step 4 — Attack Simulation
-
-
-
-Performed:
-
-\- Nmap reconnaissance
-
-\- SMB brute-force attacks using Hydra
-
-\- Encoded PowerShell execution
-
-
-
-from Kali Linux.
-
-
-
-\---
-
-
-
-\## Step 5 — Detection Engineering
-
-
-
-Created SPL detections for:
-
-\- Failed logins
-
-\- Recon activity
-
-\- Encoded PowerShell
-
-\- Endpoint telemetry anomalies
-
-
-
-\---
-
-
-
-\## Step 6 — Automation
-
-
-
-Built Python automation scripts for:
-
-\- IOC enrichment
-
-\- Severity classification
-
-\- Incident report generation
-
-\- Discord alert notifications
-
-
-
-\---
-
-
-
-\## Step 7 — Reporting \& Documentation
-
-
-
-Created:
-
-\- MITRE ATT\&CK mappings
-
-\- Detection documentation
-
-\- Incident reports
-
-\- SOC dashboards
-
-
-
-\---
-
-
-
-\# Screenshots
-
-
-
-\## Ubuntu Server
-
-!\[Ubuntu](screenshots/ubuntu/1-ubuntu-ip.png)
-
-
-
-\## Splunk Working
-
-!\[Splunk](screenshots/splunk/2-splunkenterprise-working.png)
-
-
-
-\## Windows Endpoint
-
-!\[Windows](screenshots/windows/3-windows-ip.png)
-
-
-
-\## Sysmon Logs
-
-!\[Sysmon](screenshots/windows/4-sysmonlogs.png)
-
-
-
-\## Windows Logs in Splunk
-
-!\[Splunk Logs](screenshots/splunk/5-Windowslogs-generated-in-splunk.png)
-
-
-
-\## Kali Linux
-
-!\[Kali](screenshots/kali/6-kali-ip.png)
-
-
-
-\## Nmap Scan
-
-!\[Nmap](screenshots/kali/7-Nmap-results.png)
-
-
-
-\## Splunk Nmap Detection
-
-!\[Nmap Detection](screenshots/splunk/8-Splunk-nmap-detection.png)
-
-
-
-\## Hydra Brute Force
-
-!\[Hydra](screenshots/kali/9-Hydra-attack.png)
-
-
-
-\## Failed Login Events
-
-!\[Failed Logins](screenshots/splunk/10-failed-login-events-of-hydra.png)
-
-
-
-\## PowerShell Execution
-
-!\[PowerShell](screenshots/windows/11-PowerShell-execution.png)
-
-
-
-\## PowerShell Detection
-
-!\[PowerShell Detection](screenshots/splunk/12-PowerShell-execution-Splunk-detection.png)
-
-
-
-\## Failed Login SPL Query
-
-!\[SPL Query](screenshots/splunk/13-failed-login-SPL-query-results.png)
-
-
-
-\## Splunk Alert
-
-!\[Alert](screenshots/splunk/14-failed-login-Alert-creation-page.png)
-
-
-
-\## Encoded Command Alert
-
-!\[Encoded Alert](screenshots/splunk/15-encoded-command-alert.png)
-
-
-
-\## Python IOC Enrichment
-
-!\[IOC Enrichment](screenshots/automation/16-Python-IOC-Enrichment-Automation.png)
-
-
-
-\## Full SOC Dashboard
-
-!\[SOC Dashboard](screenshots/splunk/17-full-SOC-dashboard.png)
-
-
-
-\## Splunk Alerts
-
-!\[Alerts](screenshots/splunk/18-Configure-Splunk-Alerts.png)
-
-
-
-\## Active Wazuh Agent
-
-!\[Wazuh Agent](screenshots/wazuh/19-active-Wazuh-agent.png)
-
-
-
-\## Wazuh Dashboard
-
-!\[Wazuh Dashboard](screenshots/wazuh/20-Wazuh-dashboard.png)
-
-
-
-\## Wazuh Event
-
-!\[Wazuh Event](screenshots/wazuh/21-Wazuh-event.png)
-
-
-
-\## IOC Enrichment Result
-
-!\[IOC Result](screenshots/automation/22-Python-IOC-Enrichment-Script-terminal-output-and-IOC-Enrichment-Result.png)
-
-
-
-\## JSON Incident Report
-
-!\[JSON Report](screenshots/automation/23-Python-IOC-Enrichment-Script-JSON-Incident-Report.png)
-
-
-
-\## Automated Incident Report
-
-!\[Incident Report](screenshots/automation/24-Generate-Automated-Incident-Reports.png)
-
-
-
-\## Discord Alerts
-
-!\[Discord](screenshots/automation/25-Discord-Alert-Notifications.png)
-
-
-
-\## Incident Report with ATT\&CK IDs
-
-!\[ATTACK](screenshots/reports/26-Incident-Report-with-ATT\&CK-IDs.png)
-
-
-
-\---
-
-
-
-\# MITRE ATT\&CK Mapping
-
-
-
-| Attack | ATT\&CK Technique |
-
-| SMB Brute Force | T1110 |
-
-| Network Scanning | T1046 |
-
-| PowerShell Abuse | T1059.001 |
-
-
-
-\---
-
-
-
-\# Project Outcome
-
-
-
-This project demonstrates:
-
-\- SIEM monitoring
-
-\- Endpoint telemetry analysis
-
-\- Threat detection
-
-\- Alert triage
-
-\- IOC enrichment
-
-\- Threat intelligence integration
-
-\- Incident reporting
-
-\- MITRE ATT\&CK mapping
-
-\- SOC workflow understanding
-
+This project is licensed under the MIT License.
